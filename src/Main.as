@@ -2,19 +2,19 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
-    import flash.display.MovieClip;
+	import flash.display.MovieClip;
 	import flash.net.URLLoader;
-    import flash.system.ApplicationDomain
-    import flash.system.SecurityDomain
-    import flash.system.LoaderContext
-    import flash.net.URLRequest
-    import flash.display.Loader;
-    import flash.events.Event;
-    import flash.events.UncaughtErrorEvent;
-    import flash.events.TimerEvent;
-    import flash.events.ProgressEvent;
-    import flash.events.IOErrorEvent;
-    import flash.utils.Timer;
+	import flash.system.ApplicationDomain
+	import flash.system.SecurityDomain
+	import flash.system.LoaderContext
+	import flash.net.URLRequest
+	import flash.display.Loader;
+	import flash.events.Event;
+	import flash.events.UncaughtErrorEvent;
+	import flash.events.TimerEvent;
+	import flash.events.ProgressEvent;
+	import flash.events.IOErrorEvent;
+	import flash.utils.Timer;
 	import flash.external.ExternalInterface;
 	
 	/**
@@ -23,8 +23,8 @@ package
 	 */
 	public class Main extends Sprite 
 	{
-        public var loader: Loader;
-        public var CModule: Object;
+		public var loader: Loader;
+		public var CModule: Object;
 		private var timer: Timer;
 		private var urlloader: URLLoader;
 		
@@ -77,13 +77,13 @@ package
 			});
 		}
 		public function loadSWF(swfurl: String): void {
-            var loaderContext:LoaderContext = new LoaderContext(false, ApplicationDomain.currentDomain, SecurityDomain.currentDomain);
-            loader = new Loader();
-            loader.contentLoaderInfo.addEventListener(Event.COMPLETE, this.loadComplete);
+			var loaderContext:LoaderContext = new LoaderContext(false, ApplicationDomain.currentDomain, SecurityDomain.currentDomain);
+			loader = new Loader();
+			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, this.loadComplete);
 			loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, this.onProgress);
 			loader.load(new URLRequest(swfurl), loaderContext);
-            
-            trace('load');
+			
+			trace('load');
 			timer = new Timer(100);
 			timer.addEventListener(TimerEvent.TIMER, this.isCModuleReady);
 		}
@@ -97,7 +97,7 @@ package
 			}
 			jsCall("signerReady");
 			trace("ready");
-        }
+		}
 		// Test.sign(687423, 25020488, 'D2C2C9675D34594BCD066616B5C9AE44')
 		public function doSign(roomId: Number, timeInSec: Number, did: String): String {
 			trace("sign");
@@ -114,13 +114,12 @@ package
 			CModule.free(outptr1);
 			return sign;
 		}
-        public function loadComplete(e:Event):void{
-            trace('COMPLETE');
+		public function loadComplete(e:Event):void{
+			trace('COMPLETE');
 			timer.start();
-        }
+		}
 		public function onProgress(e:ProgressEvent):void{
 			trace(e.type + ":" + e.bytesLoaded + "/" + e.bytesTotal);
 		}
 	}
-	
 }
